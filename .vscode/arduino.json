@@ -1,0 +1,5 @@
+{
+    "port": "COM3",
+    "board": "arduino:avr:uno",
+    "sketch": "arduino_bluetooth_chat\\arduino_bluetooth_chat.ino"
+}
