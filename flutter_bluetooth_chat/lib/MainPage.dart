@@ -30,23 +30,24 @@ class _MainPage extends State<MainPage> {
 
     Future.doWhile(() async {
       // Wait if adapter not enabled
-      if (await FlutterBluetoothSerial.instance.isEnabled) {
+      if (await FlutterBluetoothSerial.instance.isEnabled ?? false) {
         return false;
       }
+
       await Future.delayed(Duration(milliseconds: 0xDD));
       return true;
     }).then((_) {
       // Update the address field
       FlutterBluetoothSerial.instance.address.then((address) {
         setState(() {
-          _address = address;
+          _address = address.toString();
         });
       });
     });
 
     FlutterBluetoothSerial.instance.name.then((name) {
       setState(() {
-        _name = name;
+        _name = name.toString();
       });
     });
 
@@ -130,7 +131,8 @@ class _MainPage extends State<MainPage> {
                     );
 
                     if (selectedDevice != null) {
-                      print('Discovery -> selected ' + selectedDevice.address);
+                      print('Discovery -> selected ' +
+                          selectedDevice.address.toString());
                       _startChat(context, selectedDevice);
                     } else {
                       print('Discovery -> no device selected');

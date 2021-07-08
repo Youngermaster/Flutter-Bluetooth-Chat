@@ -54,12 +54,13 @@ class _DiscoveryPage extends State<DiscoveryPage> {
     });
   }
 
-  // @TODO . One day there should be `_pairDevice` on long tap on something... ;)
+  // TODO: One day there should be `_pairDevice` on long tap on something... ;)
 
   @override
   void dispose() {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    _streamSubscription?.cancel();
+    _streamSubscription.cancel();
+    // _streamSubscription?.cancel();
 
     super.dispose();
   }
@@ -92,7 +93,7 @@ class _DiscoveryPage extends State<DiscoveryPage> {
         itemBuilder: (BuildContext context, index) {
           BluetoothDiscoveryResult result = results[index];
           return BluetoothDeviceListEntry(
-            device: result.device,
+            device: result.device as BluetoothDevice,
             rssi: result.rssi,
             onTap: () {
               Navigator.of(context).pop(result.device);
